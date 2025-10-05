@@ -1,0 +1,315 @@
+{
+  "name": "Scheduled reply to unread Email and after replying mark them as read",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8d6c430c-aaf3-4449-83b9-7cc744664eb6",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "filters": {
+          "readStatus": "unread"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "7b90977a-7b99-4619-aa60-4324143ce777",
+      "name": "Gmail All Mails",
+      "webhookId": "7b3f5ef5-b3e8-4d9e-a617-befa54fc8fc3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fkScpi0KbomtgjqL",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $json.threadId }}",
+        "simple": false,
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "dae71221-adb9-4cc4-b124-d0464d755b62",
+      "name": "Gmail All Details",
+      "webhookId": "ed2e6665-789a-4482-97c9-6cd23e23f319",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fkScpi0KbomtgjqL",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Subject:{{ $json.headers.subject }}\n\nBody: {{ $json.textAsHtml }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "<AgentInstructions>\n    <Role>\n        <name> Email Reply Agent </name>\n        <Description> A helpful email reply agant </Description>\n    </Role>\n\n    <Goals>\n        <Goal>\n            <primary> Draft custom but very professional email replies which are 100% humanlike </primary>\n            <secondary> As an email reply agent you should not only reply but also build trust and reputation with the person you are replying to </secondary>\n        </Goal>\n        <Goal> Ensure clarity and correctness in responses </Goal>\n        <Goal> Maintain a polite and respectful tone </Goal>\n    </Goals>\n\n    <Instrunctions>\n        <Instruction> Once you recieve the email, you should throughly understand and analyse the subject line and full email body message</Instruction>\n        <Instruction> After you read the email, review <Details> and <Aim> to understand the context of the user before drafting a reply</Instruction>\n        <Instruction> Draft a professional reply using <UserInfo>. Use Contact Info when necessary </Instruction>\n    </Instrunctions>\n\n    <UserInfo>\n        <Details>\n            <Detail name = \"User Name\"> Anuj Kumar </Detail>\n            <Detail email = \"Email\"> aanuj290490@gmail.com </Detail>\n            <Detail email = \"Company\"> AI Learners India </Detail>\n            <Detail email = \"Contact Info\"> +91 7411768318 </Detail>\n        </Details>\n        <Aims>\n            <Aim name = \"Mission\"> Wants to learn AI Agent in complete depth</Aim>\n            <Aim name = \"Focus\"> Write now focusing more on learning technology then Collabs and Promotion </Aim>\n            <Aim name = \"Learning Style\"> Prefers hands-on projects and real-world applications for learning </Aim>\n        </Aims>\n    </UserInfo>\n\n    <Examples>\n        <Example>\n            <Email>\n                <Subject> Inquiry about AI Course </Subject>\n                <Body> Hello, I am interested in learning more about your AI course. Could you provide more details? </Body>\n            </Email>\n            <Reply> Dear [Recipient's Name],\n                    (If name is unknown, you may use “Dear Learner,” instead)\n                    Thank you for reaching out and showing interest in our AI course.\n                    At AI Learners India, we’re committed to delivering a comprehensive and practical learning experience, especially for those who, like yourself, are eager to explore Artificial Intelligence in depth.\n                    Our course is designed with a strong focus on hands-on projects and real-world applications, ensuring that learners not only understand the concepts but also know how to implement them. You'll dive deep into AI agents, machine learning workflows, prompt engineering, and practical use-cases across different industries.\n                    Here’s what you can expect from the course:\n                       . Foundational to Advanced Modules on AI agents, LLMs, and integration techniques.\n                       . Project-Based Learning, where you’ll build real-world AI tools from scratch.\n                       . Mentorship & Support throughout your learning journey.\n                       . Flexible Learning Pace to suit your schedule.\n                    We believe that AI should not just be learned — it should be applied. That’s why our curriculum is aligned with learners like you, Anuj, who value technology over promotional fluff, and are passionate about gaining deep, practical knowledge.\n                    If you'd like, I can share the full curriculum and upcoming batch schedule. Also, feel free to reach out directly at +91 7411768318 if you prefer a quick call.\n                    Looking forward to helping you start this exciting journey into AI!\n\n                    Warm regards,\n                    Ayush\n                    Email Reply Agent\n                    AI Learners India\n                    📞 +91 7411768318\n                    📩 aanuj290490@gmail.com </Reply>\n        </Example>\n\n        <Example>\n            <Email>\n                <Subject> Collaboration Opportunity </Subject>\n                <Body> Hi Anuj, I came across your profile and would like to discuss a potential collaboration. Are you available for a call next week? </Body>\n            </Email>\n            <Reply> \n                Dear [Sender's Name],\n                Thank you for reaching out and considering me for a potential collaboration — I truly appreciate the gesture.\n                At the moment, my primary focus is on deepening my understanding of AI agents and related technologies, and I'm intentionally keeping my schedule dedicated to hands-on learning and project work. That said, I do value meaningful connections and would love to stay in touch for any future opportunities that align with this journey.\n                I’ll revisit collaboration possibilities once I’ve made more progress on my current learning goals. Meanwhile, feel free to share a brief overview of the collaboration idea via email — I’d be happy to keep it on my radar.\n                Thanks again for reaching out, and I hope we can connect at the right time.\n\n                Warm regards,\n                Anuj Kumar\n                AI Learners India\n                📩 aanuj290490@gmail.com\n                📞 +91 7411768318\n            </Reply>\n        </Example>\n    </Examples>\n</AgentInstructions>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "c3efe160-6b69-4b3b-8540-e49812a5cd7b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        496,
+        208
+      ],
+      "id": "c65ad59d-46f4-47cc-bcc6-68a20233f948",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ym9sEerRCpnYPWUf",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appMh0HHGScasAN1L",
+          "mode": "list",
+          "cachedResultName": "Email Details",
+          "cachedResultUrl": "https://airtable.com/appMh0HHGScasAN1L"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHYtyZ0IspkyJSN",
+          "mode": "list",
+          "cachedResultName": "Email Detail",
+          "cachedResultUrl": "https://airtable.com/appMh0HHGScasAN1L/tblHYtyZ0IspkyJSN"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Sender Name": "={{ $('Gmail All Details').item.json.from.value[0].name }}",
+            "From Email": "={{ $('Gmail All Details').item.json.from.value[0].address }}",
+            "Email Body": "={{ $('Gmail All Details').item.json.text }}",
+            "Body Draft Reply": "={{ $json.output }}",
+            "ThreadId": "={{ $('Gmail All Details').item.json.threadId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Sender Name",
+              "displayName": "Sender Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "From Email",
+              "displayName": "From Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email Body",
+              "displayName": "Email Body",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Body Draft Reply",
+              "displayName": "Body Draft Reply",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "ThreadId",
+              "displayName": "ThreadId",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        976,
+        0
+      ],
+      "id": "731c3309-62c8-420b-9fc0-1aa16ab9184f",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "yUekkr0Mj93Uz4KT",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $json.fields.ThreadId }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1184,
+        0
+      ],
+      "id": "ca701c03-5fba-45fd-a76c-891aa4308f48",
+      "name": "Mark a message as read",
+      "webhookId": "06f87c0b-6c55-4711-8645-f6645c0c6853",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fkScpi0KbomtgjqL",
+          "name": "Gmail account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Gmail All Mails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail All Mails": {
+      "main": [
+        [
+          {
+            "node": "Gmail All Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail All Details": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "84cf3cd9-692e-4ecb-b2a9-f75ee7411ecf",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "54f5f263d5aa9d9d70cb63d056fbfac8cbfc60d9037c22fe7a41aed220d76f77"
+  },
+  "id": "G0LScIxycKT6AM1c",
+  "tags": []
+}

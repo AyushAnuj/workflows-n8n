@@ -1,0 +1,232 @@
+{
+  "name": "Test Workflow JSON",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -352,
+        16
+      ],
+      "id": "bea61313-7216-45fb-aa17-3ab70674ccf4",
+      "name": "When chat message received",
+      "webhookId": "fe810c37-8d4f-4300-b2b7-4eb258fd51e5"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "<AgentInstructions>\n    <Role>\n        <name>RecipeGeneratorAgenet</name>\n        <description> A helpful cooking assistant that generates custom recipes</description>\n    </Role>\n    <Goal>\n        <Primary>Provide a complete recipe including ingredients and step by step instruction based on user's required dish</Primary>\n    </Goal>\n    <Instructions>\n        <Instruction>Once you recieve user's dish name, not them down carefully.</Instruction>\n        <Instruction>Generate a list of ingredients with accurate quantities tailored to the specified serving size</Instruction>\n        <Instruction>Provide clear, step-by-step instructions on how to prepare the dish</Instruction>\n        <Instruction>Where applicable, include cooking times, tips or variants to enhance the recipe</Instruction>\n    </Instructions>\n</AgentInstructions>\n<Examples>\n    <Example>\n        <UserInput> Chicken Biryani </UserInput>\n        <UserOutput>\n            {\n                \"Name\": \"Classic Chicken Biryani\",\n                \"Description\": \"Chicken Biryani is a fragrant and flavorful Indian rice dish made with basmati rice, tender chicken, and a medley of aromatic spices. It's a celebratory meal that's rich in taste and tradition.\",\n                \"Servings\": \"4-6\",\n                \"PrepTime\": \"30 minutes (plus 1-2 hours marination)\",\n                \"CookTime\": \"45-60 minutes\",\n                \"Tags\": [\"Indian\", \"Biryani\", \"Chicken\", \"Rice\", \"Main Course\", \"One Pot\"],\n                \"Ingredients\": \"🔸 500g boneless, skinless chicken thighs or bone-in chicken pieces, cut into medium chunks\\n🔸 1 cup plain yogurt (full-fat recommended)\\n🔸 2 tbsp ginger-garlic paste\\n🔸 1 tsp red chili powder (adjust to taste)\\n🔸 1/2 tsp turmeric powder\\n🔸 1 tsp garam masala\\n🔸 1/2 tsp cumin powder\\n🔸 1/2 tsp coriander powder\\n🔸 1/2 tsp black pepper powder\\n🔸 2 green chilies, slit\\n🔸 2 tbsp chopped fresh mint leaves\\n🔸 3 tbsp chopped fresh coriander leaves\\n🔸 1 tbsp lemon juice\\n🔸 1 tsp salt (or to taste)\\n🔸 2 cups (approx. 400g) Basmati rice\\n🔸 4-5 cups water (for boiling)\\n🔸 1-2 bay leaves\\n🔸 3-4 green cardamom pods\\n🔸 2-3 cloves\\n🔸 1 small cinnamon stick\\n🔸 1 tbsp oil or ghee (optional, for non-sticky rice)\\n🔸 2 large onions, thinly sliced and fried until golden brown (birista)\\n🔸 1/4 cup ghee or oil\\n🔸 2 medium tomatoes, finely chopped (optional)\\n🔸 1/4 cup fresh mint leaves, chopped\\n🔸 1/4 cup fresh coriander leaves, chopped\\n🔸 1/4 cup warm milk mixed with saffron or food coloring\\n🔸 1 tsp kewra water or rose water (optional)\\n🔸 1-2 tbsp warm water mixed with a pinch of garam masala\\n🔸 2 tbsp fried cashew nuts (optional)\",\n                \"Instructions\": \"🔹 Marinate the Chicken:\\n• In a bowl, mix chicken with yogurt, ginger-garlic paste, spices, chilies, mint, coriander, lemon juice, and salt. Mix well.\\n• Cover and refrigerate for at least 1-2 hours (or overnight).\\n\\n🔹 Prepare Crispy Fried Onions:\\n• Thinly slice onions and fry in oil over medium heat until golden brown (15-20 mins). Drain and set aside.\\n\\n🔹 Cook the Rice:\\n• Rinse and soak Basmati rice for 30 minutes.\\n• Boil 4-5 cups water with bay leaves, cardamoms, cloves, cinnamon, salt, and oil/ghee.\\n• Add soaked rice and cook until 70% done. Drain immediately.\\n\\n🔹 Prepare Chicken Gravy:\\n• Heat 1/4 cup ghee/oil in a heavy-bottomed pot. (Optional: add cumin seeds.)\\n• Add tomatoes (optional), cook until soft and oil separates.\\n• Add marinated chicken. Cook for 8-10 mins on medium-high.\\n• Cover and simmer for 10-15 mins until chicken is 70-80% cooked and gravy thickens.\\n\\n🔹 Layer the Biryani:\\n• Spread chicken gravy at the bottom of the pot.\\n• Add half the rice, then sprinkle half the fried onions, mint, coriander, saffron milk, and kewra water.\\n• Add remaining rice and repeat garnishes.\\n• Sprinkle with garam masala water and dot with ghee.\\n• Seal pot with tight-fitting lid or dough.\\n\\n🔹 Dum Cooking:\\n• Cook on high heat for 5 minutes.\\n• Lower heat and cook for 20-25 minutes.\\n• Turn off heat and let rest for 10-15 minutes.\\n\\n🔹 Serve:\\n• Open the lid and gently fluff the biryani.\\n• Garnish with fried cashews and fresh coriander.\\n• Serve hot with raita, salad, or pickle.\",\n                \"Tips\": \"✅ Use high-quality aged Basmati rice for long grains and aroma.\\n✅ Marinate chicken well for deep flavor and tenderness.\\n✅ Do not overcook rice before layering – 70% is ideal.\\n✅ A tight seal is essential for proper dum cooking.\\n✅ Use a tawa or heat diffuser to prevent burning.\\n✅ Rest the biryani after dum cooking to let flavors settle.\\n✅ Crispy fried onions (birista) are key – make fresh or buy good quality ones.\\n✅ Add a drizzle of ghee or saffron milk before sealing for aroma and richness.\\n✅ Avoid overmixing the rice when serving to preserve texture.\"\n            }\n\n        </UserOutput>\n    </Example>\n</Examples>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -128,
+        16
+      ],
+      "id": "9d128a86-45b0-4c66-9a46-36f00fa17a46",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        240
+      ],
+      "id": "7fe2f084-de03-460e-ad2b-9f13f41a6f0a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ym9sEerRCpnYPWUf",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appIucp8J70nVyYEt",
+          "mode": "list",
+          "cachedResultName": "Recipe Details",
+          "cachedResultUrl": "https://airtable.com/appIucp8J70nVyYEt"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblwbSp6IqwZZDO4s",
+          "mode": "list",
+          "cachedResultName": "Json_Data",
+          "cachedResultUrl": "https://airtable.com/appIucp8J70nVyYEt/tblwbSp6IqwZZDO4s"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Recipe Name": "={{ $json.output.Name }}",
+            "Description": "={{ $json.output.Description }}",
+            "Ingredients": "={{ $json.output.Ingredients }}",
+            "Instructions": "={{ $json.output.Instructions }}",
+            "Tips": "={{ $json.output.Tips }}"
+          },
+          "matchingColumns": [
+            "Recipe Details"
+          ],
+          "schema": [
+            {
+              "id": "Recipe Name",
+              "displayName": "Recipe Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Description",
+              "displayName": "Description",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Ingredients",
+              "displayName": "Ingredients",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Instructions",
+              "displayName": "Instructions",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tips",
+              "displayName": "Tips",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        16
+      ],
+      "id": "f1c99af2-7c88-4725-8d16-edf2f17c9e9c",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "yUekkr0Mj93Uz4KT",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"Name\": \"Classic Chicken Biryani\",\n  \"Description\": \"Chicken Biryani is a fragrant and flavorful Indian rice dish made with basmati rice, tender chicken, and a medley of aromatic spices. It's a celebratory meal that's rich in taste and tradition.\",\n  \"Servings\": \"4-6\",\n  \"PrepTime\": \"30 minutes (plus 1-2 hours marination)\",\n  \"CookTime\": \"45-60 minutes\",\n  \"Tags\": [\"Indian\", \"Biryani\", \"Chicken\", \"Rice\", \"Main Course\", \"One Pot\"],\n  \"Ingredients\": \"🔸 500g boneless, skinless chicken thighs or bone-in chicken pieces, cut into medium chunks\\n🔸 1 cup plain yogurt (full-fat recommended)\\n🔸 2 tbsp ginger-garlic paste\\n🔸 1 tsp red chili powder (adjust to taste)\\n🔸 1/2 tsp turmeric powder\\n🔸 1 tsp garam masala\\n🔸 1/2 tsp cumin powder\\n🔸 1/2 tsp coriander powder\\n🔸 1/2 tsp black pepper powder\\n🔸 2 green chilies, slit\\n🔸 2 tbsp chopped fresh mint leaves\\n🔸 3 tbsp chopped fresh coriander leaves\\n🔸 1 tbsp lemon juice\\n🔸 1 tsp salt (or to taste)\\n🔸 2 cups (approx. 400g) Basmati rice\\n🔸 4-5 cups water (for boiling)\\n🔸 1-2 bay leaves\\n🔸 3-4 green cardamom pods\\n🔸 2-3 cloves\\n🔸 1 small cinnamon stick\\n🔸 1 tbsp oil or ghee (optional, for non-sticky rice)\\n🔸 2 large onions, thinly sliced and fried until golden brown (birista)\\n🔸 1/4 cup ghee or oil\\n🔸 2 medium tomatoes, finely chopped (optional)\\n🔸 1/4 cup fresh mint leaves, chopped\\n🔸 1/4 cup fresh coriander leaves, chopped\\n🔸 1/4 cup warm milk mixed with saffron or food coloring\\n🔸 1 tsp kewra water or rose water (optional)\\n🔸 1-2 tbsp warm water mixed with a pinch of garam masala\\n🔸 2 tbsp fried cashew nuts (optional)\",\n  \"Instructions\": \"🔹 Marinate the Chicken:\\n• In a bowl, mix chicken with yogurt, ginger-garlic paste, spices, chilies, mint, coriander, lemon juice, and salt. Mix well.\\n• Cover and refrigerate for at least 1-2 hours (or overnight).\\n\\n🔹 Prepare Crispy Fried Onions:\\n• Thinly slice onions and fry in oil over medium heat until golden brown (15-20 mins). Drain and set aside.\\n\\n🔹 Cook the Rice:\\n• Rinse and soak Basmati rice for 30 minutes.\\n• Boil 4-5 cups water with bay leaves, cardamoms, cloves, cinnamon, salt, and oil/ghee.\\n• Add soaked rice and cook until 70% done. Drain immediately.\\n\\n🔹 Prepare Chicken Gravy:\\n• Heat 1/4 cup ghee/oil in a heavy-bottomed pot. (Optional: add cumin seeds.)\\n• Add tomatoes (optional), cook until soft and oil separates.\\n• Add marinated chicken. Cook for 8-10 mins on medium-high.\\n• Cover and simmer for 10-15 mins until chicken is 70-80% cooked and gravy thickens.\\n\\n🔹 Layer the Biryani:\\n• Spread chicken gravy at the bottom of the pot.\\n• Add half the rice, then sprinkle half the fried onions, mint, coriander, saffron milk, and kewra water.\\n• Add remaining rice and repeat garnishes.\\n• Sprinkle with garam masala water and dot with ghee.\\n• Seal pot with tight-fitting lid or dough.\\n\\n🔹 Dum Cooking:\\n• Cook on high heat for 5 minutes.\\n• Lower heat and cook for 20-25 minutes.\\n• Turn off heat and let rest for 10-15 minutes.\\n\\n🔹 Serve:\\n• Open the lid and gently fluff the biryani.\\n• Garnish with fried cashews and fresh coriander.\\n• Serve hot with raita, salad, or pickle.\",\n  \"Tips\": \"✅ Use high-quality aged Basmati rice for long grains and aroma.\\n✅ Marinate chicken well for deep flavor and tenderness.\\n✅ Do not overcook rice before layering – 70% is ideal.\\n✅ A tight seal is essential for proper dum cooking.\\n✅ Use a tawa or heat diffuser to prevent burning.\\n✅ Rest the biryani after dum cooking to let flavors settle.\\n✅ Crispy fried onions (birista) are key – make fresh or buy good quality ones.\\n✅ Add a drizzle of ghee or saffron milk before sealing for aroma and richness.\\n✅ Avoid overmixing the rice when serving to preserve texture.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        16,
+        240
+      ],
+      "id": "53e8ed33-f2dc-41fa-8159-dc729715de25",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e58df6bc-a2c9-4eac-a0a5-81358a7bb500",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "54f5f263d5aa9d9d70cb63d056fbfac8cbfc60d9037c22fe7a41aed220d76f77"
+  },
+  "id": "xKxhYjb1Praz5xEI",
+  "tags": []
+}
